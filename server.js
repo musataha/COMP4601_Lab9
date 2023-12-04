@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { Matrix } = require("ml-matrix");
 const path = require("path");
-let textFile = "test5.txt";
+let textFile = "test.txt";
 let numUsers;
 let users;
 let numItems;
@@ -74,14 +74,10 @@ function recommended() {
     const pathCount = paths(edgeList, "User1", item, 3);
     itemPaths[item] = pathCount;
   });
-  // for (const [item, count] of Object.entries(itemPaths)) {
-  //   console.log(`${item} (${count})`);
-  // }
   const sortedItemPaths = Object.keys(itemPaths).sort((a, b) => itemPaths[b] - itemPaths[a]);
   sortedItemPaths.forEach((item) => {
     console.log(`${item} (${itemPaths[item]})`);
   });
-  // paths(edgeList, "User1", "Item8", 3);
 }
 function paths(edgeList, startNode, targetNode, depth, visited = new Set(), currentPath = []) {
   visited.add(startNode);
@@ -92,7 +88,6 @@ function paths(edgeList, startNode, targetNode, depth, visited = new Set(), curr
     pathCount++;
   } else if (currentPath.length <= depth) {
     const neighbors = edgeList.filter((edge) => edge.source === startNode || edge.rec === startNode);
-
     for (const neighbor of neighbors) {
       const nextNode = neighbor.source === startNode ? neighbor.rec : neighbor.source;
       if (!visited.has(nextNode)) {
