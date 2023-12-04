@@ -79,19 +79,19 @@ function recommended() {
     console.log(`${item} (${itemPaths[item]})`);
   });
 }
-function paths(edgeList, startNode, targetNode, depth, visited = new Set(), currentPath = []) {
+function paths(edgeList, startNode, targetNode, depth, visited = new Set(), curPath = []) {
   visited.add(startNode);
-  currentPath.push(startNode);
+  curPath.push(startNode);
   let pathCount = 0;
-  if (startNode === targetNode && currentPath.length === depth + 1) {
-    console.log("Path found:", currentPath.join(" -> "));
+  if (startNode === targetNode && curPath.length === depth + 1) {
+    console.log("Path:", curPath.join(" -> "));
     pathCount++;
-  } else if (currentPath.length <= depth) {
+  } else if (curPath.length <= depth) {
     const neighbors = edgeList.filter((edge) => edge.source === startNode || edge.rec === startNode);
     for (const neighbor of neighbors) {
       const nextNode = neighbor.source === startNode ? neighbor.rec : neighbor.source;
       if (!visited.has(nextNode)) {
-        pathCount += paths(edgeList, nextNode, targetNode, depth, new Set(visited), [...currentPath]);
+        pathCount += paths(edgeList, nextNode, targetNode, depth, new Set(visited), [...curPath]);
       }
     }
   }
