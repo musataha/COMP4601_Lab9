@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { Matrix } = require("ml-matrix");
 const path = require("path");
-let textFile = "test.txt";
+let textFile = "test5.txt";
 let numUsers;
 let users;
 let numItems;
@@ -84,7 +84,7 @@ function paths(edgeList, startNode, targetNode, depth, visited = new Set(), curP
   curPath.push(startNode);
   let pathCount = 0;
   if (startNode === targetNode && curPath.length === depth + 1) {
-    console.log("Path:", curPath.join(" -> "));
+    // console.log("Path:", curPath.join(" -> "));
     pathCount++;
   } else if (curPath.length <= depth) {
     const neighbors = edgeList.filter((edge) => edge.source === startNode || edge.rec === startNode);
